@@ -1,0 +1,130 @@
+# ===============================
+# SERVER CONFIG
+# ===============================
+server:
+  port: 8080
+
+  # Tomcat tuning for long-running uploads (important for bulk uploads)
+  tomcat:
+    connection-timeout: 600000   # 10 minutes
+    max-swallow-size: 2GB        # allow large payloads
+
+
+# ===============================
+# SPRING APPLICATION
+# ===============================
+spring:
+  application:
+    name: employee-service
+
+  # ===============================
+  # DATASOURCE (PostgreSQL)
+  # ===============================
+  datasource:
+    url: jdbc:postgresql://employee-db.cj44ee48qf66.ap-south-1.rds.amazonaws.com:5432/employee_db
+    username: priaccinnovation
+    password: priaccinnovation
+    driver-class-name: org.postgresql.Driver
+
+  # ===============================
+  # JPA / HIBERNATE
+  # ===============================
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+        default_schema: public
+
+  # ===============================
+  # MULTIPART FILE UPLOAD (VERY IMPORTANT)
+  # ===============================
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 10MB        # single payslip max size
+      max-request-size: 2GB      # bulk upload total size
+
+  # ===============================
+  # MAIL CONFIG (GMAIL SMTP)
+  # ===============================
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: teamhub@priaccinnovations.ai
+    password: bhtvykyvbnewgdzg
+    properties:
+      mail.smtp.auth: true
+      mail.smtp.starttls.enable: true
+
+  # ===============================
+  # KAFKA CONFIG
+  # ===============================
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: employee_group
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+
+
+# ===============================
+# WEBSOCKET CONFIG
+# ===============================
+websocket:
+  endpoint: /ws
+  allowed-origins: "*"
+
+
+# ===============================
+# APPLICATION CUSTOM CONFIG
+# ===============================
+app:
+  jwt:
+    secret: "PRIACC_INNOVA_TION_A_SECURE_RANDOM_KEY_WITH_EMPLOYEE_MAMA_PROJECT_1234567890ABCDEF"
+    expiration-ms: 86400000   # 1 day
+
+  kafka:
+    topics:
+      - employee_service.public.announcement
+      - employee_service.public.holiday
+      - employee_service.public.leave_request
+      - employee_service.public.performance_review
+      - employee_service.public.users
+      - employee_service.public.salary
+      - employee_service.public.attendance
+
+
+# ===============================
+# AWS S3 CONFIG
+# ===============================
+aws:
+  access_key: 
+  secret_key:
+  region:  ap-south-1
+  bucket: teamhub-storage-new
+
+
+# ===============================
+# ASYNC EXECUTOR (IMPORTANT FOR BULK UPLOAD)
+# ===============================
+spring.task.execution:
+  pool:
+    core-size: 5
+    max-size: 20
+    queue-capacity: 500
+  thread-name-prefix: async-payslip-
+
+
+# ===============================
+# LOGGING
+# ===============================
+logging:
+  level:
+    org.springframework.kafka: INFO
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE

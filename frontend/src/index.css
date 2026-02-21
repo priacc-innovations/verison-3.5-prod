@@ -1,0 +1,69 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-gray-100;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/* ❗ Remove the scrollbar-hide behavior so macOS style works */
+* {
+  scrollbar-width: auto;
+}
+*::-webkit-scrollbar {
+  width: 6px;
+}
+
+/* 🍏 macOS Auto-Hide Scrollbar */
+.macos-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.macos-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.macos-scrollbar::-webkit-scrollbar-thumb {
+  background-color: rgba(150, 150, 150, 0.4);
+  border-radius: 999px;
+  transition: opacity 0.3s ease;
+  opacity: 0;
+}
+
+/* Visible when scrolling */
+.macos-scrollbar.scrolling::-webkit-scrollbar-thumb,
+.macos-scrollbar:hover::-webkit-scrollbar-thumb {
+  opacity: 1;
+}
+
+/* Neon effects (your original styles) */
+.neon-blue {
+  text-shadow: 0 0 8px rgba(96, 165, 250, 0.7);
+}
+.neon-green {
+  text-shadow: 0 0 8px rgba(74, 222, 128, 0.7);
+}
+.neon-red {
+  text-shadow: 0 0 8px rgba(216, 85, 85, 0.7);
+}
+
+.required-label::after {
+  content: " *";
+  color: red;
+}
+
+.glass-card {
+  @apply backdrop-blur-xl bg-white/20 dark:bg-gray-800/30 border border-white/30 rounded-2xl shadow-xl;
+}
+
+.glass-card-small {
+  @apply backdrop-blur-md bg-white/10 dark:bg-gray-700/20 border border-white/20 rounded-xl p-4 shadow;
+}
+
