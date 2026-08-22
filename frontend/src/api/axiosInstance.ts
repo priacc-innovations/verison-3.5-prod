@@ -3,7 +3,7 @@ import axios, { InternalAxiosRequestConfig } from "axios";
 
 const api = axios.create({
   // 🔥 SAME DOMAIN FOR ENTIRE APP
-  baseURL: "http://15.206.26.130/api",
+  baseURL: "https://srinivasulutech.shop/api",
   withCredentials: true,
 });
 
