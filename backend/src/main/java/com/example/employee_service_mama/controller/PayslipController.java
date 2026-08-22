@@ -14,7 +14,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @CrossOrigin(
         origins = {
-                "https://teamhub.in",
+                "https://srinivasulutech.shop",
                 "http://teamhub.in",
                 "http://teamhub-ALB-680655485.ap-south-1.elb.amazonaws.com",
                 "http://15.206.26.130:80"
