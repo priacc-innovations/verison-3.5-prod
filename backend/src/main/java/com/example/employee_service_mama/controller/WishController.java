@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @CrossOrigin(
         origins = {
-                "http://teamhub.in",
+                "http://srinivasulutech.shop",
                 "https://teamhub.in",
                 "http://teamhub-ALB-680655485.ap-south-1.elb.amazonaws.com",
                 "http://15.206.26.130:80"
